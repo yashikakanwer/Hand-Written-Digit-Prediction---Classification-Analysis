@@ -1,1 +1,62 @@
+# **Hand Written Digit Prediction - Classification Analysis**
+-------------
+## **Objective**
+Handwritten digit recognition is the process to provide the ability to machines to recognize human handwritten digits. It is not an easy task for the machine because handwritten digits are not perfect, vary from person-to-person, and can be made with many different flavors
+## **Data Source**
+The MNIST database (Modified National Institute of Standards and Technology database) is a large database of handwritten digits that is commonly used for training various image processing systems.
+## **Import Library**
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+## **Import Data**
+from sklearn.datasets import load_digits
+/opt/conda/lib/python3.10/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy 
+
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+df = load_digits()
+fig , axes = plt.subplots(nrows = 1 , ncols = 4 , figsize =(10,3))
+for ax , image , label in zip(axes , df.images , df.target):
+    ax.set_axis_off()
+    ax.imshow(image , cmap = plt.cm.gray_r,interpolation = 'nearest')
+    ax.set_title("Training : %i" % label)
+
+## **Describe Data**
+Handwritten Digit Prediction, or Digit Classification, is like training a computer to read and understand handwritten numbers, similar to how we recognize them ourselves. Imagine you have a bunch of pictures, each showing a handwritten digit from 0 to 9
+## **Data Visualization**
+ axes = plt.subplots(nrows = 1, ncols = 4, figsize = (10, 3))
+for ax, image, label in zip(axes, df.images, df.target):
+    ax.set_axis_off()
+    ax.imshow(image, cmap=plt.cm.gray_r, interpolation = 'nearest')
+    ax.set_title('Training: %i' % label)
+## **Data Preprocessing**
+Model cannot take the image data directly so we need to perform some basic operations and process the data to make it ready for our neural network. The dimension of the training data is (60000*28*28). One more dimension is needed for the CNN model so we reshape the matrix to shape (60000*28*28*1).         
+
+df.images.shape
+df.images[0]
+
+## **Define Target Variable (y) and Feature Variables (X)**
+If you are trying to predict the price of a house, the target variable would be the sale price of the house. Feature variables, also known as independent variables, predictors, or input variables, are the variables that are used to predict or explain the target variable.
+## **Train Test Split**
+rom sklearn.model_selection import train_test_split
+x_train , x_test , y_train , y_test = train_test_split(data , df.target, test_size = 0.3)
+x_test.shape , x_train.shape , y_train.shape , y_test.shape
+((540, 64), (1257, 64), (1257,), (540,))
+## **Modeling**
+from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier()
+rf.fit(x_train,y_train)
+
+RandomForestClassifier
+RandomForestClassifier()
+## **Model Evaluation**
+
+To evaluate how accurate our model works, we have around 10,000 images in our dataset. In the training of the data model, we do not include the testing data that’s why it is new data for our model. Around 99% accuracy is achieved with this well-balanced MNIST dataset.
+
+## **Prediction**
+y_pred = rf.predict(x_test)
+print(y_pred)
+
+## **Explaination**
+This project is beginner-friendly and can be used by data science newbies. We have created and deployed a successful deep learning project of digit recognition. We build the GUI for easy learning where we draw a digit on the canvas then we classify the digit and show the results.So in this article we have cover about the handwritten digit recognition , where we have cover handwriting recognition python , handwriting recognition program , with these topics we clarify majorly about the recognizing handwritten digits or handwritten code. . As it learns, we guide it by telling whether its guesses are right or wrong. Once it masters this skill, we give it new pictures it hasn't seen during training, and it tries its best to guess the correct digit. We check its guesses to see how well it's doing, using simple checks to see if it's getting the numbers correct. This project helps us build a computer that can recognize handwritten digits, which has practical uses like reading postal codes or helping computers understand our handwriting. It's like teaching the computer to read your handwriting.
+
 
